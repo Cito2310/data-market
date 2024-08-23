@@ -1,4 +1,4 @@
-import { TicketData } from "../../../types/ticketData";
+import { TicketData } from "../../types/ticketData";
 
 export const getTotalAllDays = (tickets: TicketData[] | null) => {
     if (tickets === null) return null;

@@ -1,4 +1,4 @@
-import { TicketData } from "../../../types/ticketData";
+import { TicketData } from "../../types/ticketData";
 import { parse } from 'date-fns';
 
 export const getTotalCurrentDay = (tickets: TicketData[] | null) => {

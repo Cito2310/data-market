@@ -1,17 +1,14 @@
 import axios from "axios";
-import { useGetProducts } from "./hooks/useGetProducts";
-import { useGetTickets } from "./hooks/useGetTickets";
-import { useMemo } from "react";
 import { parse } from 'date-fns';
-import { getTotalCurrentDay } from "./hooks/helpers/getTotalCurrentDay";
-import { getTotalAllDays } from "./hooks/helpers/getTotalAllDays";
-import { getTotalForDays } from "./hooks/helpers/getTotalForDays";
-import { onlyDate } from "./hooks/helpers/onlyDate";
-import { getDay } from "./hooks/helpers/getDay";
-import { formatNumber } from "./hooks/helpers/formatNumber";
+import { useMemo } from "react";
+import { useGetProducts, useGetTickets } from "./hooks";
+import { getTotalCurrentDay, getTotalAllDays, getTotalForDays } from "./function";
+import { onlyDate, getDay, formatNumber } from "./helpers";
+
 
 const pathFolderTickets = "C:\\Users\\Negocio\\Desktop\\tickets";
 const pathFolderCurrent = "C:\\Users\\Negocio\\AppData\\Local\\Programs\\market-manager\\tickets"
+
 
 function App() {
   const { products } = useGetProducts();

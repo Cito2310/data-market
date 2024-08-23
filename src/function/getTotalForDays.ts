@@ -1,6 +1,6 @@
-import { TicketData } from "../../../types/ticketData";
+import { TicketData } from "../../types/ticketData";
 import { parse } from 'date-fns';
-import { onlyDate } from "./onlyDate";
+import { onlyDate } from "../helpers/onlyDate";
 //  @ts-ignore
 export const getTotalForDays = (tickets: TicketData[] | null): { date: Date, totalDay: number, totalNight: number }[] => {
     if (tickets === null) return [];
