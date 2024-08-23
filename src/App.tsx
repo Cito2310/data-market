@@ -1,16 +1,59 @@
-function App() {
-  const onClickBasicIpcOn = () => {
-    window.electronAPI.basicOnIpc("hello world")
-  }
+import axios from "axios";
+import { useGetProducts } from "./hooks/useGetProducts";
+import { useGetTickets } from "./hooks/useGetTickets";
+import { useMemo } from "react";
+import { parse } from 'date-fns';
+import { getTotalCurrentDay } from "./hooks/helpers/getTotalCurrentDay";
+import { getTotalAllDays } from "./hooks/helpers/getTotalAllDays";
+import { getTotalForDays } from "./hooks/helpers/getTotalForDays";
+import { onlyDate } from "./hooks/helpers/onlyDate";
+import { getDay } from "./hooks/helpers/getDay";
+import { formatNumber } from "./hooks/helpers/formatNumber";
 
-  const onClickBasicIpcHandle = async() => {
-    console.log(await window.electronAPI.basicHandleIpc("hello world"))
-  }
+const pathFolderTickets = "C:\\Users\\Negocio\\Desktop\\tickets";
+const pathFolderCurrent = "C:\\Users\\Negocio\\AppData\\Local\\Programs\\market-manager\\tickets"
+
+function App() {
+  const { products } = useGetProducts();
+  const { tickets } = useGetTickets({ 
+    dataProducts: products, 
+    pathTicketCurrent: pathFolderCurrent,
+    pathTicketFolder: pathFolderTickets,
+  });
+
+  const totalAllDays = useMemo(() => getTotalAllDays(tickets), [tickets])
+
+  const totalCurrentDay = useMemo(()=>getTotalCurrentDay(tickets), [tickets])
+
+  const totalForDays = useMemo(()=>getTotalForDays(tickets), [tickets])
 
   return (
     <div className="App">
-      <button onClick={onClickBasicIpcOn}>test basic ipc on</button>
-      <button onClick={onClickBasicIpcHandle}>test basic ipc handle</button>
+      <h1>TOTAL APERTURA: $ {totalAllDays && formatNumber(totalAllDays)}</h1>
+      <h1>TOTAL DIA: $ {totalCurrentDay && formatNumber(totalCurrentDay)}</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th className="border-collapse border border-black">DIA</th>
+            <th className="border-collapse border border-black">MAÑANA</th>
+            <th className="border-collapse border border-black">TARDE</th>
+            <th className="border-collapse border border-black">TOTAL</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {totalForDays.map(({ date, totalDay, totalNight }) => <tr key={date.getTime()+"key"} className={`${date.getDay() === 0 && "border-black border-b-2"}`}>
+            <td className="border-collapse border px-2 border-black capitalize">{`${onlyDate(date)} ${getDay(date.getDay())}`}</td>
+            <td className="border-collapse border px-2 border-black">$ {formatNumber( totalDay )}</td>
+            <td className="border-collapse border px-2 border-black">$ {formatNumber( totalNight )}</td>
+            <td className="border-collapse border px-2 border-black">$ {formatNumber( totalDay+totalNight )}</td>
+          </tr> )}
+        </tbody>
+      </table>
+      {/* {totalForDays.map( v => <div style={{display:"flex", gap:"1em"}}><h2>{onlyDate(v.date)}</h2> <h2>{v.total}</h2></div>)} */}
+
+      {/* <button onClick={onClickGetTickets}>get Tickets Data</button> */}
     </div>
   );
 }

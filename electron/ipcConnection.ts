@@ -1,8 +1,11 @@
-import { dialog, ipcMain } from 'electron';
+import { BrowserWindow, ipcMain } from 'electron';
 
 import { ipcNames } from '../types/ipcNames';
+import { ipcReadTicket } from './ipcConnection/ipcReadTickets';
 
-export const ipConnection = () => {
+export const ipConnection = (app: Electron.App, win: BrowserWindow) => {
+
+    ipcReadTicket(app, win)
 
     ipcMain.on("basic-on-ipc" as ipcNames, (e, args)=>{
         console.log(args)

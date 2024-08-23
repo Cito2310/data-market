@@ -3,8 +3,10 @@ import * as path from 'path';
 
 import { ipConnection } from './ipcConnection';
 
+let win: BrowserWindow;
+
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -38,5 +40,5 @@ app.whenReady().then(() => {
     }
   });
 
-  ipConnection();
+  ipConnection(app, win);
 });
