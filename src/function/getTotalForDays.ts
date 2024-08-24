@@ -1,8 +1,14 @@
 import { TicketData } from "../../types/ticketData";
 import { parse } from 'date-fns';
-import { onlyDate } from "../helpers/onlyDate";
+import { getDay,onlyDate } from "../helpers";
 //  @ts-ignore
-export const getTotalForDays = (tickets: TicketData[] | null): { date: Date, totalDay: number, totalNight: number }[] => {
+export const getTotalForDays = (tickets: TicketData[] | null): { 
+  date: Date;
+  totalDay: number;
+  totalNight: number;
+  dayWeek: string; 
+  totalSum: number;
+}[] => {
     if (tickets === null) return [];
 
     const ticketsParse = tickets.map( ticket => {
@@ -34,10 +40,18 @@ export const getTotalForDays = (tickets: TicketData[] | null): { date: Date, tot
     },[])
 
     const ticketForDaySum = ticketForDay.map( dayData => {
+      const date = dayData.date;
+      const dayWeek = getDay( dayData.date.getDay() )[0];
+      const totalDay = dayData.tickets.filter(({ date }) => date.getHours() > 0 && date.getHours() < 15).reduce((prev, curr)=>prev+curr.total,0 );
+      const totalNight = dayData.tickets.filter(({ date }) => date.getHours() > 15 && date.getHours() < 24).reduce((prev, curr)=>prev+curr.total,0 );
+      const totalSum = totalDay+totalNight;
+
       return {
-        date: dayData.date,
-        totalDay: dayData.tickets.filter(({ date }) => date.getHours() > 7 && date.getHours() < 15).reduce((prev, curr)=>prev+curr.total,0 ),
-        totalNight: dayData.tickets.filter(({ date }) => date.getHours() > 15 && date.getHours() < 24).reduce((prev, curr)=>prev+curr.total,0 )
+        date,
+        dayWeek,
+        totalDay,
+        totalNight,
+        totalSum
       }
     })
 

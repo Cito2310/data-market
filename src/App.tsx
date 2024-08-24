@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useGetProducts, useGetTickets } from "./hooks";
 import { getTotalCurrentDay, getTotalAllDays, getTotalForDays } from "./function";
 import { onlyDate, getDay, formatNumber } from "./helpers";
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 
 
 const pathFolderTickets = "C:\\Users\\Negocio\\Desktop\\tickets";
@@ -41,13 +42,24 @@ function App() {
 
         <tbody>
           {totalForDays.map(({ date, totalDay, totalNight }) => <tr key={date.getTime()+"key"} className={`${date.getDay() === 0 && "border-black border-b-2"}`}>
-            <td className="border-collapse border px-2 border-black capitalize">{`${onlyDate(date)} ${getDay(date.getDay())}`}</td>
-            <td className="border-collapse border px-2 border-black">$ {formatNumber( totalDay )}</td>
-            <td className="border-collapse border px-2 border-black">$ {formatNumber( totalNight )}</td>
-            <td className="border-collapse border px-2 border-black">$ {formatNumber( totalDay+totalNight )}</td>
+            <td className="border-collapse border px-4 border-black capitalize">{`${onlyDate(date)} ${getDay(date.getDay())}`}</td>
+            <td className="border-collapse border px-4 border-black">$ {formatNumber( totalDay )}</td>
+            <td className="border-collapse border px-4 border-black">$ {formatNumber( totalNight )}</td>
+            <td className="border-collapse border px-4 border-black">$ {formatNumber( totalDay+totalNight )}</td>
           </tr> )}
         </tbody>
       </table>
+
+
+      <BarChart width={1200} height={250} data={totalForDays}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="dayWeek" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="totalDay" stackId="a" fill="#8884d8" />
+        <Bar dataKey="totalNight" stackId="a" fill="#82ca9d" />
+      </BarChart>
       {/* {totalForDays.map( v => <div style={{display:"flex", gap:"1em"}}><h2>{onlyDate(v.date)}</h2> <h2>{v.total}</h2></div>)} */}
 
       {/* <button onClick={onClickGetTickets}>get Tickets Data</button> */}

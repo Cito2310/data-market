@@ -20,10 +20,10 @@
     "axios": "^1.7.4",
     "date-fns": "^3.6.0",
     "react": "^18.2.0",
-    "react-charts": "^3.0.0-beta.57",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.52.2",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "recharts": "^2.12.7"
   },
   "scripts": {
     "dev": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && electron .\"",
@@ -42,12 +42,10 @@
     }
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "electron": "^22.3.27",
     "electron-builder": "^23.6.0",
-    "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
     "typescript": "^4.9.5",
     "wait-on": "^7.0.1"
