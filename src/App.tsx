@@ -2,7 +2,7 @@ import axios from "axios";
 import { parse } from 'date-fns';
 import { useMemo } from "react";
 import { useGetProducts, useGetTickets } from "./hooks";
-import { getTotalCurrentDay, getTotalAllDays, getTotalForDays } from "./function";
+// import { getTotalCurrentDay, getTotalAllDays, getTotalForDays } from "./function";
 import { onlyDate, getDay, formatNumber } from "./helpers";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import { Header } from "./components/Header";

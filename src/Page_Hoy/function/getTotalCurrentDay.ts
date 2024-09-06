@@ -22,14 +22,8 @@ export const getTotalCurrentDay = (tickets: TicketData[] | null) => {
     const totalDay = ticketDay.reduce((prev, curr)=>prev+curr.total,0);
     const totalNight = ticketNight.reduce((prev, curr)=>prev+curr.total,0);
 
-    const ticketForHour = getDataInHour(ticketParse, "60");
-    const ticketFor15Minute = getDataInHour(ticketParse, "15");
-
     return {
       ticketsParse: ticketParse,
-
-      ticketForHour,
-      ticketFor15Minute,
 
       totalDay,
       totalNight,

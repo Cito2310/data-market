@@ -1,7 +1,8 @@
 import { generateHorary } from './generateHorary';
 import { getRoundedMinute } from './getRoundedMinute';
-export const getDataInHour = (tickets: any[], rounded: "60" | "15" | "10" | "30") => {
+export const getDataInHour = (tickets: any[] | undefined, rounded: "60" | "15" | "10" | "30") => {
 
+    if (tickets === undefined) return []
   // @ts-ignore
     const horary = generateHorary("8:00", "22:00", Number(rounded))
 
