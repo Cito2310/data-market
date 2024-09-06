@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .transition-base {
+        transition: all 100ms linear
+    }
+
+
+}

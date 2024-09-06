@@ -1,3 +1,3 @@
 export * from "./getTotalForDays";
-export * from "./getTotalCurrentDay";
+export * from "../Page_Hoy/helpers/getTotalCurrentDay";
 export * from "./getTotalAllDays";

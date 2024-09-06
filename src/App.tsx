@@ -5,6 +5,8 @@ import { useGetProducts, useGetTickets } from "./hooks";
 import { getTotalCurrentDay, getTotalAllDays, getTotalForDays } from "./function";
 import { onlyDate, getDay, formatNumber } from "./helpers";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
+import { Header } from "./components/Header";
+import { AppRoute } from "./routes/AppRoute";
 
 
 const pathFolderTickets = "C:\\Users\\Negocio\\Desktop\\tickets";
@@ -19,15 +21,18 @@ function App() {
     pathTicketFolder: pathFolderTickets,
   });
 
-  const totalAllDays = useMemo(() => getTotalAllDays(tickets), [tickets])
+  // const totalAllDays = useMemo(() => getTotalAllDays(tickets), [tickets])
 
-  const totalCurrentDay = useMemo(()=>getTotalCurrentDay(tickets), [tickets])
+  // const totalCurrentDay = useMemo(()=>getTotalCurrentDay(tickets), [tickets])
 
-  const totalForDays = useMemo(()=>getTotalForDays(tickets), [tickets])
+  // const totalForDays = useMemo(()=>getTotalForDays(tickets), [tickets])
 
   return (
     <div className="App">
-      <h1>TOTAL APERTURA: $ {totalAllDays && formatNumber(totalAllDays)}</h1>
+      <Header/>
+
+      <AppRoute tickets={tickets}/>
+      {/* <h1>TOTAL APERTURA: $ {totalAllDays && formatNumber(totalAllDays)}</h1>
       <h1>TOTAL DIA: $ {totalCurrentDay && formatNumber(totalCurrentDay)}</h1>
 
       <table>
@@ -48,10 +53,10 @@ function App() {
             <td className="border-collapse border px-4 border-black">$ {formatNumber( totalDay+totalNight )}</td>
           </tr> )}
         </tbody>
-      </table>
+      </table> */}
 
 
-      <BarChart width={1200} height={250} data={totalForDays}>
+      {/* <BarChart width={1200} height={250} data={totalForDays}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="dayWeek" />
         <YAxis />
@@ -59,10 +64,7 @@ function App() {
         <Legend />
         <Bar dataKey="totalDay" stackId="a" fill="#8884d8" />
         <Bar dataKey="totalNight" stackId="a" fill="#82ca9d" />
-      </BarChart>
-      {/* {totalForDays.map( v => <div style={{display:"flex", gap:"1em"}}><h2>{onlyDate(v.date)}</h2> <h2>{v.total}</h2></div>)} */}
-
-      {/* <button onClick={onClickGetTickets}>get Tickets Data</button> */}
+      </BarChart> */}
     </div>
   );
 }
