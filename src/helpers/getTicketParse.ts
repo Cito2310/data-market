@@ -1,8 +1,8 @@
 import { parse } from "date-fns";
-import { TicketData } from "../../types/ticketData";
+import { TicketData, TicketParse } from "../../types/ticketData";
 import { getRoundedMinute } from "./getRoundedMinute";
 
-export const getTicketParse = (tickets: TicketData[]) => {
+export const getTicketParse = (tickets: TicketData[]): TicketParse[] => {
     return tickets.map(ticket => {
         // @ts-ignore
         const dateTicket = parse(ticket.date, 'dd-MM-yyyy HH:mm:ss', new Date());
