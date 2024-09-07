@@ -26,6 +26,7 @@ export const Header = () => {
         <header className="bg-slate-800 text-white">
             <div className="mx-2">
                 <ButtonNavigator label="Hoy" to="/" />
+                <ButtonNavigator label="Semanal" to="/semanal" />
                 <ButtonNavigator label="Meses" to="/meses" />
                 <ButtonNavigator label="Historico" to="/historico" />
             </div>

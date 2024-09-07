@@ -20,7 +20,6 @@ function App() {
     pathTicketCurrent: pathFolderCurrent,
     pathTicketFolder: pathFolderTickets,
   });
-
   // const totalAllDays = useMemo(() => getTotalAllDays(tickets), [tickets])
 
   // const totalCurrentDay = useMemo(()=>getTotalCurrentDay(tickets), [tickets])
@@ -30,8 +29,10 @@ function App() {
   return (
     <div className="App">
       <Header/>
-
+      { 
+        tickets &&
       <AppRoute tickets={tickets}/>
+      }
       {/* <h1>TOTAL APERTURA: $ {totalAllDays && formatNumber(totalAllDays)}</h1>
       <h1>TOTAL DIA: $ {totalCurrentDay && formatNumber(totalCurrentDay)}</h1>
 

@@ -10,7 +10,7 @@ import { SectionTickets } from "./components/SectionTickets";
 
 
 interface props {
-    tickets: TicketData[] | null
+    tickets: TicketParse[] | null
 }
 
 export const PageHoy = ({ tickets }: props) => {
