@@ -6,11 +6,14 @@ import { useChartHorary } from "../hooks/useChartHorary";
 
 
 interface props {
-    ticketsParse: any[]
+    ticketsParse: any[];
+    height?: number;
+    defaultChart?: "Minute10" | "Minute15" | "Minute30" | "Hour";
+    minSize?: number;
 }
 
-export const ContainerChart = ({ ticketsParse }: props) => {
-    const { currentChart, setCurrentChart, ticketFor } = useChartHorary(ticketsParse);
+export const ContainerChart = ({ ticketsParse, height, defaultChart, minSize }: props) => {
+    const { currentChart, setCurrentChart, ticketFor } = useChartHorary(ticketsParse, defaultChart);
 
     return (
         <div className="w-[90%] m-auto flex justify-center flex-col items-center border border-slate-300 mt-2">
@@ -22,11 +25,11 @@ export const ContainerChart = ({ ticketsParse }: props) => {
         </div>
     {
         ticketsParse &&
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={height || 200}>
             <BarChart data={ticketFor[currentChart]} margin={{right: 16, left: -30, top: 10 }}>
                 <CartesianGrid strokeDasharray="1 1" />
                 <XAxis dataKey="name" />
-                <YAxis type="number" domain={[0,10]} dataKey="ticketEmit" />
+                <YAxis type="number" domain={[0,(minSize || 20)]} dataKey="ticketEmit" />
                 <Tooltip />
                 <Bar dataKey="ticketEmit" stackId="a" fill="#404040" />
             </BarChart>

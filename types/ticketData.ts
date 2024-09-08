@@ -22,5 +22,6 @@ export interface TicketParse extends TicketData {
         hour: number;
         minute: number;
         timeTotal: number;
+        dayWeek: string;
     },
 }

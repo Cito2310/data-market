@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { getDataInHour } from "../../helpers/getDataInHour";
 
-export const useChartHorary = (ticketsParse: any[] | undefined) => {
-    const [currentChart, setCurrentChart] = useState<"Minute10" |  "Minute15" | "Minute30" | "Hour">("Minute15")
+export const useChartHorary = (ticketsParse: any[] | undefined, defaultChart?: "Minute10" | "Minute15" | "Minute30" | "Hour" ) => {
+    const [currentChart, setCurrentChart] = useState<"Minute10" |  "Minute15" | "Minute30" | "Hour">(defaultChart || "Minute15")
 
 
     const ticketFor10Minute = getDataInHour(ticketsParse, "10");

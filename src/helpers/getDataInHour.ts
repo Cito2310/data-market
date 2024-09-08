@@ -8,6 +8,7 @@ export const getDataInHour = (tickets: any[] | undefined, rounded: "60" | "15" |
 
     const objTicketForHour = tickets.reduce((prev: {[key: string]:{total: number, amount: number}}, ticket) => {
         const parseHour = `${String(ticket.time.hour).padStart(2,"0")}:${getRoundedMinute(ticket.time.minute, rounded)}`;
+        if (prev[parseHour] === undefined) {console.log(prev, parseHour, ticket)}
         prev[parseHour].amount = prev[parseHour].amount + 1;
         prev[parseHour].total = prev[parseHour].total + ticket.total;
         return prev;

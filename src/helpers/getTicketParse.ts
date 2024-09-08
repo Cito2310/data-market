@@ -1,6 +1,7 @@
 import { parse } from "date-fns";
 import { TicketData, TicketParse } from "../../types/ticketData";
 import { getRoundedMinute } from "./getRoundedMinute";
+import { getDay } from "./getDay";
 
 export const getTicketParse = (tickets: TicketData[]): TicketParse[] => {
     return tickets.map(ticket => {
@@ -12,13 +13,16 @@ export const getTicketParse = (tickets: TicketData[]): TicketParse[] => {
         const minute = dateTicket.getMinutes();
         const timeTotal = dateTicket.getTime();
 
+        const day = getDay(dateTicket.getDay())
+
         return {
         ...ticket,
         date: dateTicket,
         total: sumTotal,
         time: { 
             hour, minute, 
-            timeTotal
+            timeTotal,
+            dayWeek: day,
         },
         }
     })
